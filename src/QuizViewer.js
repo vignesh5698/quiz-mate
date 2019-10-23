@@ -10,7 +10,8 @@ class QuizViewer extends Component {
       quizList: [],
       selectedAnswers: [],
       optionsList: [],
-      showResult: false
+      showResult: false,
+      isLoadingQuiz: true
     }
   }
 
@@ -22,7 +23,7 @@ class QuizViewer extends Component {
       const quizList = res.data.results;
       const correctAnswers = this.getCorrectAnswers(quizList);
       const optionsList = this.getAllOptions(quizList)
-      this.setState({ quizList, correctAnswers, optionsList })
+      this.setState({ quizList, correctAnswers, optionsList, isLoadingQuiz: false })
     })
     .catch((err) => {
       console.log(`Error while fetching quiz: ${err}`)
@@ -84,6 +85,15 @@ class QuizViewer extends Component {
     )
   }
 
+  renderLoadingSpinner = () => {
+    return (
+      <div className='custom-spinner'>
+        <h1>Loading</h1>
+        <i className='fa fa-spinner fa-pulse fa-4x fa-fw'></i>
+      </div>
+    )
+  }
+
   renderQuiz = () => {
     const { quizList, optionsList } = this.state;
     return _.map(quizList, (quiz, questionIndex) => {
@@ -111,7 +121,7 @@ class QuizViewer extends Component {
     return (
       <div className="card">
         <div className="card-header">
-          <h3>Questions answered {questionHeader}</h3>
+          <h4>Questions answered {questionHeader}</h4>
         </div>
         <div className="card-body">
           {this.renderQuiz()}        
@@ -131,9 +141,16 @@ class QuizViewer extends Component {
   }
 
   render() {
-    const { showResult } = this.state;
+    const { showResult, isLoadingQuiz } = this.state;
     return(
-      showResult ? this.renderResultPage() : this.renderQuizCard()
+      <div>
+        {showResult ? this.renderResultPage() :
+          (isLoadingQuiz ? this.renderLoadingSpinner() : this.renderQuizCard())
+        }
+        <div className="footer">
+          <p>Created with <span> ❤ </span> by <a href="https://vignesh-tech.github.io">Vignesh</a></p>
+        </div>
+      </div>
     )
   }  
 }

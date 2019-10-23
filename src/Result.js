@@ -15,6 +15,9 @@ class Result extends Component {
         <div className='custom-footer'>
           Scoreboard will update soon...
         </div>
+        <div className="footer">
+          <p>Created with <span> ❤ </span> by <a href="https://vignesh-tech.github.io">Vignesh</a></p>
+        </div>
       </div>
     );
   }

@@ -9,12 +9,18 @@
   cursor: pointer
 }
 
-h1, h3{
+h1, h4{
   text-align-last: center;
 }
 
 .custom-footer {
   text-align-last: center;
+  margin-bottom: 30px;
+}
+
+.custom-spinner {
+  text-align-last: center;
+  margin-top: 20px;
 }
 
 .custom-button {
@@ -67,4 +73,14 @@ input[type=checkbox] + label:before {
   vertical-align: bottom;
   color: transparent;
   transition: .2s;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: -10px;
+  width: 100%;
+  background-color: rgb(208, 205, 205);
+  color: black;
+  text-align: center;
 }

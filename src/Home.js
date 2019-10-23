@@ -112,6 +112,9 @@ class Home extends Component {
     return (  
       <div>
         {isQuizViewer ? this.renderQuizPage() : this.renderHomePage()}
+        <div className="footer">
+          <p>Created with <span> ❤ </span> by <a href="https://vignesh-tech.github.io">Vignesh</a></p>
+        </div>
       </div>
     );
   }
