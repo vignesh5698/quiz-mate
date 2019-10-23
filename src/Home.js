@@ -60,7 +60,7 @@ class Home extends Component {
             <label>Name:</label>
             <input className="form-control" id="name" onChange={this.onNameChange} placeholder='Enter your name...'></input>
             <label>Select category:</label>
-            <select className="form-control" onClick={this.onSelectCategory} onTouchStart={this.onSelectCategory}>
+            <select className="form-control" onChange={this.onSelectCategory}>
               <option value='9'>General Knowledge</option>
               <option value='10'>Books</option>
               <option value='18'>Computers</option>
@@ -74,18 +74,18 @@ class Home extends Component {
               <option value='28'>Vehicles</option>
             </select>
           </div>
-          <div className="form-group" onClick={this.onSelectNoOfQuestions}>
+          <div className="form-group">
             <label>Select number of questions:</label>
-            <select className="form-control">
+            <select className="form-control" onChange={this.onSelectNoOfQuestions} >
               <option value={5}>5</option>
               <option value={10}>10</option>
               <option value={15}>15</option>
               <option value={20}>20</option>
             </select>
           </div>
-          <div className="form-group" onClick={this.onSelectDifficultyLevel}>
+          <div className="form-group">
             <label>Select difficulty level:</label>
-            <select className="form-control">
+            <select className="form-control" onChange={this.onSelectDifficultyLevel}>
               <option value='easy'>Easy</option>
               <option value='medium'>Medium</option>
               <option value='hard'>Hard</option>
