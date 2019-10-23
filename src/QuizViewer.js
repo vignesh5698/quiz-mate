@@ -74,6 +74,8 @@ class QuizViewer extends Component {
               name={option.label} value={option.label}
               checked={option.selected}
               onChange={(event) => this.onSelectOption(options, event, questionIndex, optionIndex)}
+              onClick={(event) => this.onSelectOption(options, event, questionIndex, optionIndex)}
+              onTouchMoveCapture={(event) => this.onSelectOption(options, event, questionIndex, optionIndex)}
             />
             <label htmlFor={`${option.label}-${questionIndex}`}>{option.label}</label>
           </div>
