@@ -5,6 +5,10 @@
   margin-top: 5%; 
 }
 
+.custom-option {
+  cursor: pointer
+}
+
 h1, h3{
   text-align-last: center;
 }
