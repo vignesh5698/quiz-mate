@@ -60,7 +60,7 @@ class Home extends Component {
             <label>Name:</label>
             <input className="form-control" id="name" onChange={this.onNameChange} placeholder='Enter your name...'></input>
             <label>Select category:</label>
-            <select className="form-control" onClick={this.onSelectCategory}>
+            <select className="form-control" onClick={this.onSelectCategory} onTouchStart={this.onSelectCategory}>
               <option value='9'>General Knowledge</option>
               <option value='10'>Books</option>
               <option value='18'>Computers</option>
