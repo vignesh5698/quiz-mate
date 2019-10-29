@@ -11,7 +11,9 @@ class QuizViewer extends Component {
       selectedAnswers: [],
       optionsList: [],
       showResult: false,
-      isLoadingQuiz: true
+      isLoadingQuiz: true,
+      category: null,
+      level: null
     }
   }
 
@@ -22,8 +24,10 @@ class QuizViewer extends Component {
     .then((res) => {
       const quizList = res.data.results;
       const correctAnswers = this.getCorrectAnswers(quizList);
-      const optionsList = this.getAllOptions(quizList)
-      this.setState({ quizList, correctAnswers, optionsList, isLoadingQuiz: false })
+      const optionsList = this.getAllOptions(quizList);
+      const category = _.get(quizList, '[0].category');
+      const level = _.get(quizList, '[0].difficulty');
+      this.setState({ quizList, correctAnswers, optionsList, isLoadingQuiz: false, category, level })
     })
     .catch((err) => {
       console.log(`Error while fetching quiz: ${err}`)
@@ -136,16 +140,19 @@ class QuizViewer extends Component {
   }
 
   renderResultPage = () => {
-    const { correctAnswers, selectedAnswers } = this.state;
-    return <Result correctAnswers={correctAnswers} selectedAnswers={selectedAnswers} />
+    const { correctAnswers, selectedAnswers, category, level } = this.state;
+    const { name } = this.props;
+    return <Result correctAnswers={correctAnswers} selectedAnswers={selectedAnswers} name={name} category={category} level={level} />
   }
 
   render() {
     const { showResult, isLoadingQuiz } = this.state;
     return(
       <div>
-        {showResult ? this.renderResultPage() :
-          (isLoadingQuiz ? this.renderLoadingSpinner() : this.renderQuizCard())
+        { showResult ? this.renderResultPage() : (
+          isLoadingQuiz ?
+          this.renderLoadingSpinner() :
+          this.renderQuizCard())
         }
         <div className="footer">
           <p>Created with <span> ❤ </span> by <a href="https://vignesh-tech.github.io">Vignesh</a></p>
