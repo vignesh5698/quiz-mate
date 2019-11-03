@@ -89,3 +89,7 @@ input[type=checkbox] + label:before {
   font-family: inherit;
   font-size: x-large;
 }
+
+.result-head{
+  font-size: x-large;
+}
