@@ -36,32 +36,66 @@ class Result extends Component {
   }
 
   getUserData = () => {
-    let { name } = this.state;
-      let ref = Firebase.database().ref(`/`);
-      ref.on("value", snapshot => {
-        const state = snapshot.val();
-        this.setState({
-          scorecard: state
-        });
+    let ref = Firebase.database().ref(`/`);
+    ref.on("value", snapshot => {
+      const state = snapshot.val();
+      this.setState({
+        scorecard: state
       });
+    });
   }
 
   getNumberOfCorrectAnswers = () => {
     const { selectedAnswers, correctAnswers } = this.props;
-    return _.intersection(selectedAnswers, correctAnswers).length;
+    let numberOfCorrectAnswers = 0;
+    _.each(selectedAnswers, (selectedAnswer, index) => {
+      return correctAnswers[index] === selectedAnswer ? numberOfCorrectAnswers++ : null;
+    });
+    return numberOfCorrectAnswers;
+  }
+
+  getCorrectAnswerList = (item, index) => {
+    const { selectedAnswers } = this.props;
+    const selectedClass = selectedAnswers[index] === item ? `success` : `danger`;
+    let answerClass = `alert alert-${selectedClass}`;
+
+    return(
+      <tr>
+        <td className={answerClass}>
+            {index+1}.&nbsp;&nbsp;{item}
+        </td>
+      </tr>
+    )
+  }
+
+  renderResults = () => {
+    const noOfQuestionsCorrect = this.getNumberOfCorrectAnswers();
+    const { correctAnswers } = this.props;
+    const correctAnswersList = _.map(correctAnswers, (correctAnswer, index) =>
+      this.getCorrectAnswerList(correctAnswer, index));
+    return(
+      <div className="card">
+        <div className="card-header">
+          <div className="text-info text-center">
+              <strong>Quiz Result :&nbsp;</strong> {noOfQuestionsCorrect} / {correctAnswers.length}
+          </div>
+        </div>
+        <div className="card-body">
+          <p><strong className="text-primary">Correct Answers&nbsp;:</strong></p>
+          <table className="table">
+            <tbody>
+            {correctAnswersList}  
+            </tbody>
+          </table>
+        </div>
+      </div>
+    )
   }
 
   render() {
-    console.log(this.state.scorecard);
-    const { correctAnswers } = this.props;
-    const noOfQuestionsCorrect = this.getNumberOfCorrectAnswers();
     return ( 
       <div>
-        <div className="alert alert-success">
-          <h1>
-            <strong>Result:&nbsp;</strong> {noOfQuestionsCorrect} / {correctAnswers.length}
-          </h1>
-        </div>
+        {this.renderResults()}
         <div className='custom-footer'>
           Scoreboard will update soon...
         </div>
