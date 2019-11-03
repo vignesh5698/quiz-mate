@@ -84,3 +84,8 @@ input[type=checkbox] + label:before {
   color: black;
   text-align: center;
 }
+
+.answer-text{
+  font-family: monospace;
+  font-size: x-large;
+}

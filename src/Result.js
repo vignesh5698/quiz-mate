@@ -80,11 +80,11 @@ class Result extends Component {
               <strong>Quiz Result :&nbsp;</strong> {noOfQuestionsCorrect} / {correctAnswers.length}
           </div>
         </div>
-        <div className="card-body">
-          <p><strong className="text-primary">Correct Answers&nbsp;:</strong></p>
+        <div>
+          <p className="text-primary ml-2  mt-3 answer-text text-center">Correct Answers</p>
           <table className="table">
             <tbody>
-            {correctAnswersList}  
+              {correctAnswersList}  
             </tbody>
           </table>
         </div>
