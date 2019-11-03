@@ -76,7 +76,7 @@ class Result extends Component {
     return(
       <div className="card">
         <div className="card-header">
-          <div className="text-info text-center">
+          <div className="text-info text-center text-uppercase">
               <strong>Quiz Result :&nbsp;</strong> {noOfQuestionsCorrect} / {correctAnswers.length}
           </div>
         </div>
